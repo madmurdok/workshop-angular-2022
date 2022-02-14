@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataFromUsa = this.dictionaryService.getDataFromUSA();
-    this.dataFromImdb = this.imdbApiService.searchMovies('The Blade');
+    //this.dataFromUsa = this.dictionaryService.getDataFromUSA();
+    this.dataFromImdb = this.imdbApiService.searchMoviesStored();
     this.createForm();
   }
 
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
     this.formGroup = this.formBuilder.group({
       'title': [''],
-      'titleTypes': this.formBuilder.group({
+      'title_type': this.formBuilder.group({
         feature: false,
         tv_special: false,
         short: false,
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
         documentary: false,
         tv_episode: false,
       }),
-      'numVotes': [''],
+      'num_votes': [''],
       'genres': this.formBuilder.group({
         "action": false,
         "adventure": false,
@@ -84,7 +84,39 @@ export class HomeComponent implements OnInit {
 
 
   onSubmit(post: any) {
-    this.post = post;
+    let queryString = '';
+
+    const parseCheckboxes = (checkboxes: any) => {
+      let resultString = '';
+      for(const box in checkboxes){
+        if(checkboxes[box]){ // catch true values
+          resultString = `${resultString},${box}`;
+        }
+      }
+      return resultString.length > 0 ? resultString.substring(1) : null;
+    }
+
+    for (const property in post) {
+      if(typeof post[property] === 'object'){
+        const checkboxes = parseCheckboxes(post[property]);
+        if(checkboxes){
+          queryString = `${queryString}&${property}=${checkboxes}`;
+        }
+      }else{
+        switch(property) {
+          case 'title':
+            queryString = `${queryString}&${property}=${post[property]}`;
+            break;
+          case 'num_votes':
+          case 'runtime':
+            // in real api it should be range from one value to another, that's why we need commas at the end
+            queryString = `${queryString}&${property}=${post[property]},`;
+            break;
+        }
+      }
+    }
+    this.dataFromImdb = this.imdbApiService.searchMovies(queryString.substring(1));
+    // this.post = queryString;
   }
 
 

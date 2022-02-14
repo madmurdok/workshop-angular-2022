@@ -15,12 +15,15 @@ export class ImdbApiService {
 
   constructor(private appHttpclientService: AppHttpClientService) { }
 
-  // searchMovies(searchExpression: string): Observable<ImdbSearchResponse> {
-  //   const url = `${this.baseUrl}/en/API/SearchMovie/${this.api_key}/${searchExpression}`
-  //   return this.appHttpclientService.Get(url);
-  // }
+  searchMovies(searchExpression: string): Observable<ImdbAdvSearchResponce> {
+    // const url = `${this.baseUrl}/en/API/SearchMovie/${this.api_key}?${searchExpression}`
+    const url = `${this.baseUrl}/API/AdvancedSearch/${this.api_key}?${searchExpression}`
+    console.log(url);
+    return this.appHttpclientService.Get(url);
+  }
 
-  searchMovies(searchExpression: string) {
+  //hardcoded, just for test
+  searchMoviesStored() {
     return of({
       "queryString": "?title_type=feature,tv_movie,tv_special,documentary,short,video&num_votes=5000,&genres=action&runtime=100,&sort=user_rating,desc",
       "results": [

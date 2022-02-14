@@ -91,6 +91,7 @@ export class AppHttpClientService {
   // noinspection JSMethodCanBeStatic
   private isExpired(createdAt: number): boolean {
     const time = new Date().getTime();
+    console.log(time - createdAt);
     return time - createdAt > timeStep; // todo check edge conditions
   }
 }

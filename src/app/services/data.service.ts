@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Dictionary } from '../_shared/interfaces/app-types.interface';
 import { RequestOptionsModel } from '../_shared/models/request-options.model';
 import { AppHttpClientService } from '../_shared/services/app-http-client.service';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
@@ -14,7 +13,8 @@ export class DataService {
 
   public getDataFromUSA(){
     const url = environment.dataUsaUrl;
-    const requestOptions = new RequestOptionsModel({params: new HttpParams({fromObject: {'drilldowns': 'Nation', 'measures':'Population'}})});
+    const requestOptions = new RequestOptionsModel({
+      params: new HttpParams({fromObject: {'drilldowns': 'Nation', 'measures':'Population'}})});
     return this.appHttpClientService.Get<any>(url,requestOptions);
   }
 }

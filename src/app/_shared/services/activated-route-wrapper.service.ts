@@ -106,5 +106,3 @@ export class ActivatedRouteWrapperService {
     return !(sameNames && sameValues);
   }
 }
-
-
