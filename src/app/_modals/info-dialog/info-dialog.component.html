@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{data.title}}  movie information </h1>
+<div mat-dialog-content class="flex-container">
+  <div class="left">
+    <img [src]="data.image" height="400px" alt="">
+  </div>
+  <div class="right">
+    <p>Title: {{data.title}}</p>
+    <p>Description: {{data.description}}</p>
+    <p>Runtime: {{data.runtimeStr}}</p>
+    <p>Genres: {{data.genres}}</p>
+    <p>Rating: {{data.contentRating}}</p>
+    <p>imdbRating: {{data.imDbRating}}</p>
+    <p>imdbRating Votes: {{data.imDbRatingVotes}}</p>
+    <p>Metacritic: {{data.metacriticRating}}</p>
+    <p>Plot: {{data.plot}}</p>
+    <p>Stars: {{data.stars}}</p>
+  </div>
+
+</div>
+<div mat-dialog-actions class="revert">
+  <button mat-button color="primary" (click)="onClose()">Got it</button>
+</div>

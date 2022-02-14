@@ -1,0 +1,17 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.left {
+  flex-grow: 1;
+}
+
+.right {
+  flex-grow: 2;
+}
+
+.revert {
+  flex-direction: row-reverse;
+}

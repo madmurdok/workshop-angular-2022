@@ -1,0 +1,79 @@
+<div class="flex-container">
+  <div class="left">
+    <div class="container" *ngIf="!post; else forminfo" novalidate>
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+
+        <h4>Select title types:</h4>
+        <section class="example-section" formGroupName="titleTypes">
+          <p><mat-checkbox formControlName="feature">Feature Film</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv_special">TV Special</mat-checkbox></p>
+          <p><mat-checkbox formControlName="short">Short Film</mat-checkbox></p>
+          <p><mat-checkbox formControlName="podcast_episode">Podcast Episode</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv_movie">TV Movie</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv_series">TV Series</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv_short">TV Short</mat-checkbox></p>
+          <p><mat-checkbox formControlName="mini_series">Mini-Series</mat-checkbox></p>
+          <p><mat-checkbox formControlName="video">Video</mat-checkbox></p>
+          <p><mat-checkbox formControlName="documentary">Documentary</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv_episode">TV Episode</mat-checkbox></p>
+        </section>
+
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Number of votes" formControlName="numVotes">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Runtime" formControlName="runtime">
+        </mat-form-field>
+
+        <h4>Select Genre types:</h4>
+        <section class="example-section" formGroupName="genres">
+          <p><mat-checkbox formControlName="action">Action</mat-checkbox></p>
+          <p><mat-checkbox formControlName="adventure">Adventure</mat-checkbox></p>
+          <p><mat-checkbox formControlName="animation">Animation</mat-checkbox></p>
+          <p><mat-checkbox formControlName="biography">Biography</mat-checkbox></p>
+          <p><mat-checkbox formControlName="comedy">Comedy</mat-checkbox></p>
+          <p><mat-checkbox formControlName="crime">Crime</mat-checkbox></p>
+          <p><mat-checkbox formControlName="documentary">Documatary</mat-checkbox></p>
+          <p><mat-checkbox formControlName="drama">Drama</mat-checkbox></p>
+          <p><mat-checkbox formControlName="family">Family</mat-checkbox></p>
+          <p><mat-checkbox formControlName="fantasy">Fantasy</mat-checkbox></p>
+          <p><mat-checkbox formControlName="noir">Noir</mat-checkbox></p>
+          <p><mat-checkbox formControlName="history">History</mat-checkbox></p>
+          <p><mat-checkbox formControlName="horror">Horror</mat-checkbox></p>
+          <p><mat-checkbox formControlName="music">Music</mat-checkbox></p>
+          <p><mat-checkbox formControlName="musical">Musical</mat-checkbox></p>
+          <p><mat-checkbox formControlName="mystery">Mystery</mat-checkbox></p>
+          <p><mat-checkbox formControlName="news">News</mat-checkbox></p>
+          <p><mat-checkbox formControlName="tv">Reality-TV</mat-checkbox></p>
+          <p><mat-checkbox formControlName="romance">Romancd</mat-checkbox></p>
+          <p><mat-checkbox formControlName="fi">Sci-fi</mat-checkbox></p>
+          <p><mat-checkbox formControlName="sport">Sport</mat-checkbox></p>
+          <p><mat-checkbox formControlName="show">Game Show</mat-checkbox></p>
+          <p><mat-checkbox formControlName="thriller">Thriller</mat-checkbox></p>
+          <p><mat-checkbox formControlName="war">War Film</mat-checkbox></p>
+          <p><mat-checkbox formControlName="wester">Western</mat-checkbox></p>
+        </section>
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <ng-template #forminfo>
+      <div class="container">
+        {{ post | json }}
+      </div>
+    </ng-template>
+  </div>
+  <div class="right">
+    <ng-container *ngIf="dataFromImdb | async">
+      <app-imdb-results-list [data]="dataFromImdb"></app-imdb-results-list>
+    </ng-container>
+  </div>
+</div>

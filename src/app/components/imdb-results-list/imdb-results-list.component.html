@@ -1,0 +1,11 @@
+<mat-nav-list>
+  <mat-list-item *ngFor="let result of results | async">
+    <img [src]="result.image" matListAvatar alt="">
+    <div matLine>Title: {{ result.title }}</div>
+    <div matLine>Genres: {{ result.genres }}</div>
+    <div matLine>imDbRating: {{ result.imDbRating }}</div>
+    <button mat-raised-button color="primary" class="button"  (click)="showInfo(result)">
+      Get Full Info
+    </button>
+  </mat-list-item>
+</mat-nav-list>
